@@ -6,7 +6,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,6 +16,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.tabs.TabLayout;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Tab_Fragment_2 extends Fragment {
     //객체 선언
@@ -71,6 +76,14 @@ public class Tab_Fragment_2 extends Fragment {
             activity.mBundle = null;
 
         }
+
+//        View v = inflater.inflate(R.layout.tabfragment2, container, false);
+        ListView listView = rootView.findViewById(R.id.listview);
+        List<String> list = new ArrayList();
+        list.add("HI");
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), android.R.layout.simple_list_item_1,list);
+        listView.setAdapter(adapter);
 
         //버튼 3에 기능 추가 : 프래그먼트 3으로 데이터 보내기
         button3.setOnClickListener(new View.OnClickListener() {
