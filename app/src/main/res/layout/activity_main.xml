@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!--전체적인 레이아웃을 잡음-->
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!--액션바 레이아웃-->
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="clip_horizontal|center"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+<!--            <androidx.appcompat.widget.Toolbar-->
+<!--                android:id="@+id/toolbar"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:background="@color/design_default_color_primary_dark"-->
+<!--                android:elevation="1dp"-->
+<!--                android:theme="@style/ThemeOverlay.AppCompat.Dark">-->
+<!--                &lt;!&ndash;elevation : 약간 떠있는 느낌&ndash;&gt;-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/titleText"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="타이틀"-->
+<!--                    android:textAppearance="@style/Widget.AppCompat.Toolbar"-->
+<!--                    android:textColor="#FFFFFF"-->
+<!--                    android:textSize="24sp" />-->
+<!--            </androidx.appcompat.widget.Toolbar>-->
+
+            <!--탭 레이아웃-->
+            <!--tabMode : fixed면 탭이 고정된 길이를 갖게끔 자동으로 나눠진다-->
+            <!--scrollable이면 옆으로 넘길 수 있게 된다-->
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/background_light"
+                android:elevation="1dp"
+                app:tabGravity="fill"
+                app:tabMode="fixed"
+                app:tabSelectedTextColor="@color/black"
+                app:tabTextColor="@color/white" />
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <FrameLayout
+            android:id="@+id/contatiner"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+        </FrameLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</RelativeLayout>
