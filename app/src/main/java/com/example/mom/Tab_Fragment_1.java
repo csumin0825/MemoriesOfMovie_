@@ -25,7 +25,7 @@ import java.io.Serializable;
 
 public class Tab_Fragment_1 extends Fragment {
     //객체 선언
-    Button button2, datePickBtn;
+    Button saveBtn, datePickBtn;
     TextView dateText;
 
     MainActivity activity;
@@ -61,7 +61,7 @@ public class Tab_Fragment_1 extends Fragment {
 
         //객체 초기화
         dateText = rootView.findViewById(R.id.textView1);
-        button2 = rootView.findViewById(R.id.button2);
+        saveBtn = rootView.findViewById(R.id.saveBtn);
         datePickBtn= rootView.findViewById(R.id.datePicker);
         titleText= rootView.findViewById(R.id.titleText);
         ratingStar= rootView.findViewById(R.id.ratingStar);
@@ -104,7 +104,7 @@ public class Tab_Fragment_1 extends Fragment {
         }
 
         //버튼2에 기능 추가 : 프래그먼트 2로 데이터 보내기
-        button2.setOnClickListener(new View.OnClickListener() {
+        saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String title = titleText.getText().toString();
@@ -120,6 +120,9 @@ public class Tab_Fragment_1 extends Fragment {
                 bundle.putInt("index", 0);
 
                 activity.fragBtnClick(bundle);
+
+                titleText.setText("");
+                contentText.setText("");
 
                 //두 번째 탭을 선택(첫 번째 탭은 index가 0)
                 TabLayout.Tab tab = activity.tabs.getTabAt(1);
