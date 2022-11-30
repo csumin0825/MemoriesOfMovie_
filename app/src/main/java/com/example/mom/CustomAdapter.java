@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,7 +29,7 @@ public class CustomAdapter extends ArrayAdapter implements AdapterView.OnItemCli
     }
     class ViewHolder{
         public TextView mo_title;
-        public TextView mo_rate;
+        public RatingBar mo_rate;
     }
 
 //    @Override
@@ -47,11 +48,11 @@ public class CustomAdapter extends ArrayAdapter implements AdapterView.OnItemCli
         }
         viewHolder = new ViewHolder();
         viewHolder.mo_title = (TextView) convertView.findViewById(R.id.movieTitle);
-        viewHolder.mo_rate = (TextView)convertView.findViewById(R.id.rateStar);
+        viewHolder.mo_rate = (RatingBar)convertView.findViewById(R.id.rating);
 
         final MovieItem movieItem = (MovieItem) list.get(position);
         viewHolder.mo_title.setText(movieItem.getTitle());
-        viewHolder.mo_rate.setText(movieItem.getRateString());
+        viewHolder.mo_rate.setRating(movieItem.getRate());
 
 //        View view = mLayoutInflater.inflate(R.layout.tab2_listview_item, null);
 //

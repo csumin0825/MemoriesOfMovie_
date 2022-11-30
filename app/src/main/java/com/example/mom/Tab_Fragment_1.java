@@ -91,17 +91,17 @@ public class Tab_Fragment_1 extends Fragment {
         });
 
         //텍스트뷰1에 프래그먼트 3에서 보낸 데이터 받기
-        if(activity.mBundle != null) {
-            Bundle bundle = activity.mBundle;
-            receiveData = bundle.getString("sendData");
-            StudentDTO student3 = (StudentDTO) bundle.getSerializable("student3");
-            String title = student3.getTitle();
-            int year = student3.getYear();
-
-            int index = bundle.getInt("index");
-
-            activity.mBundle = null;
-        }
+//        if(activity.mBundle != null) {
+//            Bundle bundle = activity.mBundle;
+//            receiveData = bundle.getString("sendData");
+//            StudentDTO student3 = (StudentDTO) bundle.getSerializable("student3");
+//            String title = student3.getTitle();
+//            int year = student3.getYear();
+//
+//            int index = bundle.getInt("index");
+//
+//            activity.mBundle = null;
+//        }
 
         //버튼2에 기능 추가 : 프래그먼트 2로 데이터 보내기
         saveBtn.setOnClickListener(new View.OnClickListener() {
@@ -123,6 +123,7 @@ public class Tab_Fragment_1 extends Fragment {
 
                 titleText.setText("");
                 contentText.setText("");
+                ratingStar.setRating(0);
 
                 //두 번째 탭을 선택(첫 번째 탭은 index가 0)
                 TabLayout.Tab tab = activity.tabs.getTabAt(1);

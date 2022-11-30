@@ -83,19 +83,28 @@ public class Tab_Fragment_2 extends Fragment {
         customAdapter = new CustomAdapter(getContext(),movieList);
         customListView.setAdapter(customAdapter);
 
-        ArrayList<String> dataArr = PreferenceManager.getObject(context,"index"+index);
+//        ArrayList<String> dataArr = PreferenceManager.getObject(context,"index"+index);
+//
+//        if(dataArr.size() != 0){
+//            for(int i =0; i<dataArr.size(); i++){
+//
+//            }
+//        }
 
-        if(dataArr.size() != 0){
-            for(int i =0; i<dataArr.size(); i++){
-
+        index = PreferenceManager.getInt(context, "index");
+        if (index!= 0) {
+            for (int i = 0; i < index; i++) {
+                int a = i+1;
+                ArrayList<String> dataArr = PreferenceManager.getObject(context, "index"+a);
+                movieList.add(new MovieItem(dataArr.get(0), Integer.parseInt(dataArr.get(1)), Integer.parseInt(dataArr.get(2)), Integer.parseInt(dataArr.get(3)), Float.parseFloat(dataArr.get(4)), dataArr.get(5)));
             }
         }
 
-        movieList.add(new MovieItem("HI",1,2,3,4,"HHH"));
+//        movieList.add(new MovieItem("HI",1,2,3,4,"HHH"));
 
         PreferenceManager.getString(context,"title");
         String text = PreferenceManager.getString(context,"title");
-        movieList.add(new MovieItem(text,2,3,4,5,"JJJ"));
+//        movieList.add(new MovieItem(text,2,3,4,5,"JJJ"));
 
 //        customListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 //            @Override
@@ -107,10 +116,10 @@ public class Tab_Fragment_2 extends Fragment {
 //        });
 
         //객체 초기화
-        textView2 = rootView.findViewById(R.id.textView2);
-        button3 = rootView.findViewById(R.id.button3);
+//        textView2 = rootView.findViewById(R.id.textView2);
+//        button3 = rootView.findViewById(R.id.button3);
         deleteBtn = rootView.findViewById(R.id.delete);
-        editBtn = rootView.findViewById(R.id.edit);
+//        editBtn = rootView.findViewById(R.id.edit);
 
         //텍스트뷰2에 프래그먼트 1에서 보낸 데이터 받기
         if(activity.mBundle != null) {
@@ -152,8 +161,8 @@ public class Tab_Fragment_2 extends Fragment {
 //            int index = bundle.getInt("index");
 
 //            textView2.append(receiveData + "\n");
-            textView2.append("title : " + title + "\nyear : " + mYear + "\nmonth : " + mMonth);
-            textView2.append("\nday : " + mDay + "\nrate : " + rate + "\ncontent : " + content);
+//            textView2.append("title : " + title + "\nyear : " + mYear + "\nmonth : " + mMonth);
+//            textView2.append("\nday : " + mDay + "\nrate : " + rate + "\ncontent : " + content);
             activity.mBundle = null;
 
         }
@@ -162,24 +171,24 @@ public class Tab_Fragment_2 extends Fragment {
 //        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), android.R.layout.simple_list_item_1,list);
 //        listView.setAdapter(adapter);
 
-        //버튼 3에 기능 추가 : 프래그먼트 3으로 데이터 보내기
-        button3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Bundle bundle = new Bundle();
-//                bundle.putString("sendData", sendData);
-                //bundle.putSerializable() : 객체를 보낼때 사용함
-                bundle.putSerializable("student2", student2);
-                bundle.putInt("index", 1);
-
-                activity.fragBtnClick(bundle);
-
-                //세 번째 탭을 선택(두 번째 탭은 index가 1)
-                TabLayout.Tab tab = activity.tabs.getTabAt(2);
-                tab.select();
-            }
-        });
+//        //버튼 3에 기능 추가 : 프래그먼트 3으로 데이터 보내기
+//        button3.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                Bundle bundle = new Bundle();
+////                bundle.putString("sendData", sendData);
+//                //bundle.putSerializable() : 객체를 보낼때 사용함
+//                bundle.putSerializable("student2", student2);
+//                bundle.putInt("index", 1);
+//
+//                activity.fragBtnClick(bundle);
+//
+//                //세 번째 탭을 선택(두 번째 탭은 index가 1)
+//                TabLayout.Tab tab = activity.tabs.getTabAt(2);
+//                tab.select();
+//            }
+//        });
 
         deleteBtn.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -189,14 +198,14 @@ public class Tab_Fragment_2 extends Fragment {
             }
         });
 
-        editBtn.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                index = PreferenceManager.getInt(context, "index");
-                ArrayList<String> dataArr = PreferenceManager.getObject(context,"index"+index);
-                Toast.makeText(getActivity().getApplicationContext(),dataArr.toString()+index, Toast.LENGTH_SHORT).show();
-            }
-        });
+//        editBtn.setOnClickListener(new View.OnClickListener(){
+//            @Override
+//            public void onClick(View v){
+//                index = PreferenceManager.getInt(context, "index");
+//                ArrayList<String> dataArr = PreferenceManager.getObject(context,"index"+index);
+//                Toast.makeText(getActivity().getApplicationContext(),dataArr.toString()+index, Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
         return rootView;
     }

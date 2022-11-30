@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     TabLayout tabs;
     Tab_Fragment_1 fragment1;
     Tab_Fragment_2 fragment2;
-    Tab_Fragment_3 fragment3;
+//    Tab_Fragment_3 fragment3;
 
     Fragment selected = null;
 
@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         //프래그먼트 초기화
         fragment1 = new Tab_Fragment_1();
         fragment2 = new Tab_Fragment_2();
-        fragment3 = new Tab_Fragment_3();
+//        fragment3 = new Tab_Fragment_3();
 
         //프래그먼트 넣기(바꾸기)
         getSupportFragmentManager().beginTransaction().replace(R.id.contatiner, fragment1).commit();
@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         tabs = findViewById(R.id.tabs);
         tabs.addTab(tabs.newTab().setText("리뷰 작성"));
         tabs.addTab(tabs.newTab().setText("나의 리뷰"));
-        tabs.addTab(tabs.newTab().setText("일정"));
+//        tabs.addTab(tabs.newTab().setText("일정"));
 
         //탭이 선택되었을때 작동하는 메서드
         tabs.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -66,9 +66,10 @@ public class MainActivity extends AppCompatActivity {
                     selected = fragment1;
                 } else if (position == 1) {
                     selected = fragment2;
-                } else if (position == 2) {
-                    selected = fragment3;
                 }
+//                else if (position == 2) {
+//                    selected = fragment3;
+//                }
 
                 //선택된 프래그먼트로 바꾸기
                 getSupportFragmentManager().beginTransaction().replace(R.id.contatiner, selected).commit();
