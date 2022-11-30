@@ -14,6 +14,8 @@ public class MainActivity extends AppCompatActivity {
     //로그캣 사용 준비
     private static final String TAG = "MainActivity";
 
+    public int listIndex=0;
+
     //객체 선언
     Toolbar toolbar;
     TabLayout tabs;

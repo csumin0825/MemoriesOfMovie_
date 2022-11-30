@@ -1,6 +1,8 @@
 package com.example.mom;
 
-public class MovieItem {
+import java.io.Serializable;
+
+public class MovieItem implements Serializable {
     String title,content;
     int mYear, mMonth, mDay;
     float rate;

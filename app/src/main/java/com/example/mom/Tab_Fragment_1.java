@@ -21,6 +21,8 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.tabs.TabLayout;
 
+import java.io.Serializable;
+
 public class Tab_Fragment_1 extends Fragment {
     //객체 선언
     Button button2, datePickBtn;
@@ -28,7 +30,7 @@ public class Tab_Fragment_1 extends Fragment {
 
     MainActivity activity;
     String sendData, receiveData;
-    StudentDTO student1;
+    MovieItem movieItem1;
 
     Context context;
 
@@ -108,13 +110,13 @@ public class Tab_Fragment_1 extends Fragment {
                 String title = titleText.getText().toString();
                 float rate = ratingStar.getRating();
                 String content = contentText.getText().toString();
-                student1 = new StudentDTO(title,mYear,mMonth,mDay,rate,content);
+                movieItem1 = new MovieItem(title,mYear,mMonth,mDay,rate,content);
 
 
                 Bundle bundle = new Bundle();
                 bundle.putString("sendData", sendData);
                 //bundle.putSerializable() : 객체를 보낼때 사용함
-                bundle.putSerializable("student1", student1);
+                bundle.putSerializable("movieItem1", movieItem1);
                 bundle.putInt("index", 0);
 
                 activity.fragBtnClick(bundle);

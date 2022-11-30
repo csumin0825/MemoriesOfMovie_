@@ -20,18 +20,25 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.tabs.TabLayout;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Tab_Fragment_2 extends Fragment {
+
+    Gson gson = new GsonBuilder().create();
+
     //객체 선언
-    Button button3;
+    Button button3, deleteBtn, editBtn;
     TextView textView2;
 
     MainActivity activity;
     String sendData, receiveData;
+//    int index = activity.listIndex;
     StudentDTO student2;
+    int index;
 
     Context context;
 
@@ -39,6 +46,8 @@ public class Tab_Fragment_2 extends Fragment {
     ListView customListView;
 
     private static CustomAdapter customAdapter;
+
+    ArrayList<ArrayList<String>> dataList = new ArrayList<ArrayList<String>>();
 
     //onAttach : 프래그먼트와 액티비티가 연결될때 호출되는 메서드
     //onDetach : 프래그먼트와 액티비티의 연결이 끊길때 호출되는 메서드
@@ -58,6 +67,9 @@ public class Tab_Fragment_2 extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        index = PreferenceManager.getInt(context, "index");
+        PreferenceManager.setInt(context,"index",index);
+
         //XML, java 연결
         //XML이 메인에 직접 붙으면 true, 프래그먼트에 붙으면 false
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.tabfragment2, container, false);
@@ -71,6 +83,20 @@ public class Tab_Fragment_2 extends Fragment {
         customAdapter = new CustomAdapter(getContext(),movieList);
         customListView.setAdapter(customAdapter);
 
+        ArrayList<String> dataArr = PreferenceManager.getObject(context,"index"+index);
+
+        if(dataArr.size() != 0){
+            for(int i =0; i<dataArr.size(); i++){
+
+            }
+        }
+
+        movieList.add(new MovieItem("HI",1,2,3,4,"HHH"));
+
+        PreferenceManager.getString(context,"title");
+        String text = PreferenceManager.getString(context,"title");
+        movieList.add(new MovieItem(text,2,3,4,5,"JJJ"));
+
 //        customListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 //            @Override
 //            public void onItemClick(AdapterView<?> parent, View view, int position, long l) {
@@ -83,22 +109,47 @@ public class Tab_Fragment_2 extends Fragment {
         //객체 초기화
         textView2 = rootView.findViewById(R.id.textView2);
         button3 = rootView.findViewById(R.id.button3);
+        deleteBtn = rootView.findViewById(R.id.delete);
+        editBtn = rootView.findViewById(R.id.edit);
 
         //텍스트뷰2에 프래그먼트 1에서 보낸 데이터 받기
         if(activity.mBundle != null) {
             Bundle bundle = activity.mBundle;
-//            receiveData = bundle.getString("sendData");
-            StudentDTO student1 = (StudentDTO) bundle.getSerializable("student1");
-            String title = student1.getTitle();
-            int mYear = student1.getYear();
-            int mMonth = student1.getMonth();
-            int mDay = student1.getDay();
-            float rate = student1.getRate();
-            String content = student1.getContent();
-//            list.add(new MovieItem(title,mYear,mMonth,mDay,rate,content));
-             movieList.add(new MovieItem(title,mYear,mMonth,mDay,rate,content));
+            MovieItem movieItem1 =(MovieItem)bundle.getSerializable("movieItem1");
 
-            int index = bundle.getInt("index");
+            String title = movieItem1.getTitle();
+            int mYear = movieItem1.getYear();
+            int mMonth = movieItem1.getMonth();
+            int mDay = movieItem1.getDay();
+            float rate = movieItem1.getRate();
+            String content = movieItem1.getContent();
+
+            ArrayList<String> data = new ArrayList<>();
+            data.add(title);
+            data.add(Integer.toString(mYear));
+            data.add(Integer.toString(mMonth));
+            data.add(Integer.toString(mDay));
+            data.add(Float.toString(rate));
+            data.add(content);
+//            dataList.add(data);
+            index = PreferenceManager.getInt(context, "index")+ 1;
+            PreferenceManager.setInt(context , "index", index);
+
+            PreferenceManager.setObject(context,"index"+index,data);
+
+
+//            list.add(new MovieItem(title,mYear,mMonth,mDay,rate,content));
+
+//            PreferenceManager.setString(context,"title",title);
+            MovieItem first = new MovieItem(title,mYear,mMonth,mDay,rate,content);
+            movieList.add(first);
+//            String json = gson.toJson(first);
+//            MovieItem item = gson.fromJson("value", MovieItem.class);
+
+
+//             movieList.add(new MovieItem(title,mYear,mMonth,mDay,rate,content));
+
+//            int index = bundle.getInt("index");
 
 //            textView2.append(receiveData + "\n");
             textView2.append("title : " + title + "\nyear : " + mYear + "\nmonth : " + mMonth);
@@ -115,6 +166,7 @@ public class Tab_Fragment_2 extends Fragment {
         button3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Bundle bundle = new Bundle();
 //                bundle.putString("sendData", sendData);
                 //bundle.putSerializable() : 객체를 보낼때 사용함
@@ -126,6 +178,23 @@ public class Tab_Fragment_2 extends Fragment {
                 //세 번째 탭을 선택(두 번째 탭은 index가 1)
                 TabLayout.Tab tab = activity.tabs.getTabAt(2);
                 tab.select();
+            }
+        });
+
+        deleteBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                PreferenceManager.clear(context);
+                PreferenceManager.setInt(context,"index",0);
+            }
+        });
+
+        editBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                index = PreferenceManager.getInt(context, "index");
+                ArrayList<String> dataArr = PreferenceManager.getObject(context,"index"+index);
+                Toast.makeText(getActivity().getApplicationContext(),dataArr.toString()+index, Toast.LENGTH_SHORT).show();
             }
         });
 
